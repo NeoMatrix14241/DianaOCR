@@ -1,0 +1,8 @@
+2025-05-26 17:33:57,944 - INFO - CUDA not available. Using CPU
+2025-05-26 17:33:57,951 - INFO - Set PyTorch to use 12 CPU threads
+2025-05-26 17:33:57,951 - INFO - Loading model: Qwen/Qwen2-VL-7B-Instruct
+2025-05-26 17:34:11,794 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-26 17:34:11,795 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-26 17:34:11,807 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-26 17:34:11,809 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-26 17:34:11,816 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`

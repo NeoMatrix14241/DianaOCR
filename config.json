@@ -1,0 +1,26 @@
+{
+  "model_settings": {
+    "model_name": "Qwen/Qwen2-VL-7B-Instruct",
+    "device": "auto",
+    "torch_dtype": "auto"
+  },
+  "processing_settings": {
+    "max_workers": null,
+    "batch_size": 1,
+    "max_new_tokens": 1024,
+    "temperature": 0.1,
+    "do_sample": false
+  },
+  "ocr_prompt": "Extract all text from this image accurately. Maintain formatting and structure.",
+  "supported_formats": [".tif", ".tiff", ".png", ".jpg", ".jpeg", ".bmp"],
+  "output_settings": {
+    "save_json_results": true,
+    "save_individual_txt": true,
+    "include_metadata": true
+  },
+  "logging": {
+    "level": "INFO",
+    "save_to_file": true,
+    "log_filename": "ocr_processing.log"
+  }
+}
