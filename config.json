@@ -1,14 +1,11 @@
-{
-  "model_settings": {
-    "model_name": "Qwen/Qwen2-VL-7B-Instruct",
-    "device": "auto",
-    "torch_dtype": "auto"
-  },
-  "processing_settings": {
-    "max_workers": null,
+{  "model_settings": {
+    "model_name": "Qwen/Qwen2-VL-2B-Instruct",
+    "device": "cpu",
+    "torch_dtype": "float32"
+  },"processing_settings": {
+    "max_workers": 2,
     "batch_size": 1,
-    "max_new_tokens": 1024,
-    "temperature": 0.1,
+    "max_new_tokens": 512,
     "do_sample": false
   },
   "ocr_prompt": "Extract all text from this image accurately. Maintain formatting and structure.",

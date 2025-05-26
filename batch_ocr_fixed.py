@@ -13,11 +13,6 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict, Tuple, Optional
 import logging
-import warnings
-
-# Suppress transformers warnings about generation flags
-os.environ["TRANSFORMERS_VERBOSITY"] = "error"
-warnings.filterwarnings("ignore", message=".*generation flags.*")
 
 import torch
 from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
@@ -42,7 +37,7 @@ def load_config(config_path: str = "config.json") -> Dict:
     try:
         with open(config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
-        logger.info(f"Loaded configuration from {config_path}")
+        logger.info(f"✓ Loaded configuration from {config_path}")
         return config
     except Exception as e:
         logger.warning(f"Could not load config from {config_path}: {e}")
@@ -54,6 +49,7 @@ def load_config(config_path: str = "config.json") -> Dict:
             },
             "processing_settings": {
                 "max_new_tokens": 1024,
+                "temperature": 0.1,
                 "do_sample": False
             },
             "ocr_prompt": "Extract all text from this image accurately. Maintain formatting and structure."
@@ -203,33 +199,21 @@ class QwenVLOCRProcessor:
                 padding=True,
                 return_tensors="pt"
             )
-            inputs = inputs.to(self.device)            # Get generation settings from config
+            inputs = inputs.to(self.device)
+            
+            # Get generation settings from config
             processing_settings = self.config.get("processing_settings", {})
             max_new_tokens = processing_settings.get("max_new_tokens", 1024)
             do_sample = processing_settings.get("do_sample", False)
-            
-            # Prepare generation kwargs - only include valid parameters
-            generation_kwargs = {
-                "max_new_tokens": max_new_tokens,
-                "do_sample": do_sample
-            }
-            
-            # Only add sampling parameters if do_sample is True
-            if do_sample:
-                temperature = processing_settings.get("temperature", 0.1)
-                top_p = processing_settings.get("top_p", 0.9)
-                top_k = processing_settings.get("top_k", 50)
-                generation_kwargs.update({
-                    "temperature": temperature,
-                    "top_p": top_p,
-                    "top_k": top_k
-                })
+            temperature = processing_settings.get("temperature", 0.1)
             
             # Generate text
             with torch.no_grad():
                 output = self.model.generate(
                     **inputs,
-                    **generation_kwargs
+                    max_new_tokens=max_new_tokens,
+                    do_sample=do_sample,
+                    temperature=temperature
                 )
             
             # Decode output
